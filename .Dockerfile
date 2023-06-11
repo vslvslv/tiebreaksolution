@@ -13,4 +13,4 @@ RUN dotnet restore
 RUN dotnet build --configuration Release --no-restore
 
 # Run the tests and generate NUnit output
-CMD ["dotnet", "test", "--no-restore", "--logger", "trx;LogFilePath=/app/TestResults/test_results.trx"]
+CMD ["dotnet", "test", "--no-restore", "--logger:console;verbosity=detailed"]
