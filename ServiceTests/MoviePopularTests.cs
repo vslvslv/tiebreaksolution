@@ -8,7 +8,7 @@ namespace ServiceTests
         public MyApiClient client = new MyApiClient(Properties.Resources.baseUrl);
 
         [Test]
-        public void VerifyTvPopularSuccess()
+        public void VerifyMoviePopularSuccess()
         {
             var response = client.GetMoviePopular();
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
@@ -17,14 +17,14 @@ namespace ServiceTests
         }
 
         [Test]
-        public void VerifyTvPopularUnauthorized()
+        public void VerifyMoviePopularUnauthorized()
         {
             var response = client.GetMoviePopular(_token: false);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
         }
 
         [Test]
-        public void VerifyTvPopularPagesQueryParam()
+        public void VerifyMoviePopularPagesQueryParam()
         {
             var response = client.GetMoviePopular(page: 2);
             Assert.That(response.Data?.page, Is.EqualTo(2));
