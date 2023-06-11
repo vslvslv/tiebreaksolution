@@ -8,7 +8,7 @@ public class MyApiClient : BaseRestClient
     {
     }
 
-    public RestResponse<CreateRequestTokenResponseDto> CreateRequestToken(bool _token = true)
+    public RestResponse<T> CreateRequestToken<T>(bool _token = true) where T : new()
     {
         var relativePath = $"/3/authentication/token/new";
         var request = CreateRequest(relativePath, Method.Get);
@@ -16,7 +16,7 @@ public class MyApiClient : BaseRestClient
         if (_token)
             AddToken(request);
 
-        var response = Execute<CreateRequestTokenResponseDto>(request);
+        var response = Execute<T>(request);
 
         return response;
     }
@@ -34,7 +34,7 @@ public class MyApiClient : BaseRestClient
         return response;
     }
 
-    public RestResponse<PopularResponseDto> GetMoviePopular(bool _token = true, string lang = "en-US", int page = 1)
+    public RestResponse<PopularResponseDto> GetMoviePopular<T>(bool _token = true, string lang = "en-US", int page = 1) where T : new()
     {
         var relativePath = $"/3/movie/popular?language={lang}&page={page}";
         var request = CreateRequest(relativePath, Method.Get);
@@ -47,7 +47,7 @@ public class MyApiClient : BaseRestClient
         return response;
     }
 
-    public RestResponse<DiscoverMovieResponseDto> DiscoverMovie(bool _token = true, string lang = "en-US", int page = 1, bool includeVideo = true)
+    public RestResponse<DiscoverMovieResponseDto> DiscoverMovie<T>(bool _token = true, string lang = "en-US", int page = 1, bool includeVideo = true) where T : new()
     {
         var relativePath = $"3/discover/movie?language={lang}&page={page}&include_video={includeVideo}";
         var request = CreateRequest(relativePath, Method.Get);
@@ -60,7 +60,7 @@ public class MyApiClient : BaseRestClient
         return response;
     }
 
-    public RestResponse<FindByExternalIdResponseDto> FindByExternalId(string external_id, string externalsSources, bool _token = true)
+    public RestResponse<T> FindByExternalId<T>(string external_id, string externalsSources, bool _token = true) where T : new()
     {
         var relativePath = $"/3/find/{external_id}?external_source={externalsSources}";
         var request = CreateRequest(relativePath, Method.Get);
@@ -68,7 +68,7 @@ public class MyApiClient : BaseRestClient
         if (_token)
             AddToken(request);
 
-        var response = Execute<FindByExternalIdResponseDto>(request);
+        var response = Execute<T>(request);
 
         return response;
     }

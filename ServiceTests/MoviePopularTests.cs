@@ -1,4 +1,4 @@
-using Microsoft.Extensions.Configuration;
+using DummyClient.Models.Response;
 using System.Net;
 
 namespace ServiceTests
@@ -10,7 +10,7 @@ namespace ServiceTests
         [Test]
         public void VerifyMoviePopularSuccess()
         {
-            var response = client.GetMoviePopular();
+            var response = client.GetMoviePopular<PopularResponseDto>();
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
             Assert.IsNotNull(response.Data?.results);
             Assert.That(response.Data.page, Is.EqualTo(1));
@@ -19,14 +19,14 @@ namespace ServiceTests
         [Test]
         public void VerifyMoviePopularUnauthorized()
         {
-            var response = client.GetMoviePopular(_token: false);
+            var response = client.GetMoviePopular<DefaultErrorResponseDto>(_token: false);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
         }
 
         [Test]
         public void VerifyMoviePopularPagesQueryParam()
         {
-            var response = client.GetMoviePopular(page: 2);
+            var response = client.GetMoviePopular<PopularResponseDto>(page: 2);
             Assert.That(response.Data?.page, Is.EqualTo(2));
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using DummyClient.Models.Response;
+using System.Net;
 
 namespace ServiceTests
 {
@@ -9,7 +10,7 @@ namespace ServiceTests
         [Test]
         public void VerifyDiscoverMovieSuccess()
         {
-            var response = client.DiscoverMovie();
+            var response = client.DiscoverMovie<DiscoverMovieResponseDto>();
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
             Assert.IsNotNull(response.Data?.results);
             Assert.That(response.Data.page, Is.EqualTo(1));
@@ -18,14 +19,14 @@ namespace ServiceTests
         [Test]
         public void VerifyDiscoverMovieUnauthorized()
         {
-            var response = client.DiscoverMovie(_token: false);
+            var response = client.DiscoverMovie<DefaultErrorResponseDto>(_token: false);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
         }
 
         [Test]
         public void VerifyDiscoverMovieIncludeVideo()
         {
-            var response = client.DiscoverMovie(includeVideo: false);
+            var response = client.DiscoverMovie<DiscoverMovieResponseDto>(includeVideo: false);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
             response.Data?.results.ForEach(result =>
             {

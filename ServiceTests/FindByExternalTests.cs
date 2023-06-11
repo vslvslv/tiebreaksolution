@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using DummyClient.Models.Response;
+using System.Net;
 
 
 namespace ServiceTests
@@ -12,17 +13,19 @@ namespace ServiceTests
         [Test]
         public void VerifyFindByIdSuccess()
         {
-            var response = client.FindByExternalId(external_id: testId, externalsSources: "imdb_id");
+            var response = client.FindByExternalId<FindByExternalIdResponseDto>(external_id: testId, externalsSources: "imdb_id");
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
-            Assert.IsNotNull(response.Data.movie_results.First(x => x.title == movieTitle));
+            Assert.IsNotNull(response.Data?.movie_results.First(x => x.title == movieTitle));
 
         }
 
         [Test]
         public void VerifyFindByIdUnauthorized()
         {
-            var response = client.FindByExternalId(external_id: testId, externalsSources: "imdb_id", _token: false);
+            var response = client.FindByExternalId<DefaultErrorResponseDto>(external_id: testId, externalsSources: "imdb_id", _token: false);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.Unauthorized));
+            Assert.That(response.Data?.success, Is.False);
+
         }
     }
 }
