@@ -16,12 +16,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Docker
-        uses: docker/setup-docker@v1
-
       - name: Build Docker image
-        run: docker build -t my-image-name .
+        run: docker build -t tiebreak-client .
 
       - name: Run tests
-        run: docker run my-image-name dotnet test --no-restore --verbosity normal
+        run: docker run tiebreak-client dotnet test --no-restore --verbosity normal
 
