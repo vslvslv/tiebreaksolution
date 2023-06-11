@@ -1,27 +1,27 @@
-name: Docker Image CI
+name: Build and Test
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
-
-  build:
-
+  build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file .Dockerfile --tag tiebreak-client:$(date +%s)
-      
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Run Tests
-      run:  docker run --name tiebreak-container tiebreak-client
-    
+      - name: Set up Docker
+        uses: docker/setup-docker@v1
+
+      - name: Build Docker image
+        run: docker build -t my-image-name .
+
+      - name: Run tests
+        run: docker run my-image-name dotnet test --no-restore --verbosity normal
+
