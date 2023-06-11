@@ -1,0 +1,16 @@
+services:
+  tiebreak-client:
+    image: tiebreak-client
+    volumes:
+      - C:\tmp:/app/ServiceTests/TestResults
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - tiebreak-client
+    volumes:
+      - C:\tmp:/app/ServiceTests/TestResults
+
+

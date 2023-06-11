@@ -1,0 +1,26 @@
+# .NET
+*.dll
+*.exe
+*.pdb
+*.userprefs
+*.suo
+*.cache
+*.vs
+bin/
+obj/
+TestResults/
+TestResults.json
+
+# Visual Studio
+.vscode/
+*.sln.ide
+*.suo
+*.user
+*.sln.docstates
+
+# Build artifacts
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa]ny[Cc]pu/
