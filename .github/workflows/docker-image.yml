@@ -15,6 +15,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: 
-       docker build . --file .Dockerfile --tag tiebreak-client:$(date +%s)
-       docker run --name tiebreak-container tiebreak-client:$(date +%s)
+      run: docker build . --file .Dockerfile --tag tiebreak-client:$(date +%s)
+      
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Run Tests
+      run:  docker run --name tiebreak-container tiebreak-client
+    
