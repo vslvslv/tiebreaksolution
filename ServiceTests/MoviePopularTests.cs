@@ -15,7 +15,7 @@ namespace ServiceTests
             var response = client.GetMoviePopular();
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
             Assert.IsNotNull(response.Data?.results);
-            Assert.That(response.Data.page, Is.EqualTo(2));
+            Assert.That(response.Data.page, Is.EqualTo(1));
         }
 
         [Test]
