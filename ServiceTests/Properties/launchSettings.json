@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ServiceTests": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "baseUrl": "https://api.themoviedb.org"
+      }
+    }
+  }
+}

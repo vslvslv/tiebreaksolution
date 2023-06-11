@@ -5,8 +5,7 @@ namespace ServiceTests
 {
     public class CreateSessionTests
     {
-        static string baseUrl = "https://api.themoviedb.org";
-        public MyApiClient client = new MyApiClient(baseUrl);
+        public MyApiClient client = new MyApiClient(Properties.Resources.baseUrl);
 
         [Test]
         public void CreateRequestTokenSuccessfully()
