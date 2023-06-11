@@ -34,7 +34,7 @@ public class MyApiClient : BaseRestClient
         return response;
     }
 
-    public RestResponse<PopularResponseDto> GetMoviePopular<T>(bool _token = true, string lang = "en-US", int page = 1) where T : new()
+    public RestResponse<T> GetMoviePopular<T>(bool _token = true, string lang = "en-US", int page = 1) where T : new()
     {
         var relativePath = $"/3/movie/popular?language={lang}&page={page}";
         var request = CreateRequest(relativePath, Method.Get);
@@ -42,12 +42,12 @@ public class MyApiClient : BaseRestClient
         if (_token)
             AddToken(request);
 
-        var response = Execute<PopularResponseDto>(request);
+        var response = Execute<T>(request);
 
         return response;
     }
 
-    public RestResponse<DiscoverMovieResponseDto> DiscoverMovie<T>(bool _token = true, string lang = "en-US", int page = 1, bool includeVideo = true) where T : new()
+    public RestResponse<T> DiscoverMovie<T>(bool _token = true, string lang = "en-US", int page = 1, bool includeVideo = true) where T : new()
     {
         var relativePath = $"3/discover/movie?language={lang}&page={page}&include_video={includeVideo}";
         var request = CreateRequest(relativePath, Method.Get);
@@ -55,7 +55,7 @@ public class MyApiClient : BaseRestClient
         if (_token)
             AddToken(request);
 
-        var response = Execute<DiscoverMovieResponseDto>(request);
+        var response = Execute<T>(request);
 
         return response;
     }
